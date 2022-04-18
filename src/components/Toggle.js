@@ -21,6 +21,7 @@ const Toggle = () => {
 
 const Container = styled.label`
   width: 300px;
+  margin: 10px 0;
   display: flex;
   position: relative;
   justify-content: space-between;
