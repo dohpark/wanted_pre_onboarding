@@ -4,13 +4,13 @@ const Tab = () => {
   return (
     <Container>
       <Input type="radio" id="radio1" name="tab" defaultChecked />
-      <Label for="radio1">감자</Label>
+      <Label htmlFor="radio1">감자</Label>
 
       <Input type="radio" id="radio2" name="tab" />
-      <Label for="radio2">고구마</Label>
+      <Label htmlFor="radio2">고구마</Label>
 
       <Input type="radio" id="radio3" name="tab" />
-      <Label for="radio3">카레라이스</Label>
+      <Label htmlFor="radio3">카레라이스</Label>
 
       <Slider id="slider" />
     </Container>
@@ -44,6 +44,7 @@ const Label = styled.label`
   color: #b5b5b5;
   padding: 20px 0px;
   border-bottom: 3px solid #b5b5b5;
+  cursor: pointer;
 `;
 
 const Input = styled.input`

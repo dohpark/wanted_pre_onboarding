@@ -26,7 +26,7 @@ const Container = styled.label`
   position: relative;
   justify-content: space-between;
   border-radius: 15px;
-  background-color: #b5b5b5;
+  background-color: #e6e6e6;
 `;
 
 const Input = styled.input`
