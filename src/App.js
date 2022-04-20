@@ -2,6 +2,7 @@ import Toggle from "./components/Toggle";
 import Tab from "./components/Tab";
 import Slider from "./components/Slider";
 import Input from "./components/Input";
+import Dropdown from "./components/Dropdown";
 
 const App = () => {
   return (
@@ -10,6 +11,7 @@ const App = () => {
       <Tab />
       <Slider />
       <Input />
+      <Dropdown />
     </>
   );
 };

@@ -10,7 +10,7 @@ const Input = () => {
 
   const onKeyUpEmailHandler = (e) => {
     const email = e.target.value;
-    const emailCheckRegex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+    const emailCheckRegex = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/;
     const inValid = document.querySelector("#emailInvalid");
     const checkMark = document.querySelector(".checkMark");
 
