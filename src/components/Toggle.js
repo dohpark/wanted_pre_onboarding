@@ -1,19 +1,11 @@
 import styled from "styled-components";
 
 const Toggle = () => {
-  const onClick = (e) => {
-    const defaultItem = document.querySelector(".default");
-    const specificItem = document.querySelector(".specific");
-
-    defaultItem.classList.toggle("target");
-    specificItem.classList.toggle("target");
-  };
-
   return (
     <Container>
-      <Input className="toggle" type="checkbox" onClick={onClick} />
+      <Input className="toggle" type="checkbox" />
       <Slider className="slider" />
-      <Item className="default target">기본</Item>
+      <Item className="default">기본</Item>
       <Item className="specific">상세</Item>
     </Container>
   );
@@ -35,8 +27,22 @@ const Input = styled.input`
   width: 0;
   height: 0;
 
-  &:checked + .slider {
+  &:checked ~ .slider {
     transform: translateX(150px);
+  }
+
+  &:not(:checked) ~ .default {
+    color: black;
+  }
+  &:checked ~ .default {
+    color: #666666;
+  }
+
+  &:not(:checked) ~ .specific {
+    color: #666666;
+  }
+  &:checked ~ .specific {
+    color: black;
   }
 `;
 
@@ -50,10 +56,6 @@ const Item = styled.div`
   color: #666666;
   cursor: pointer;
   z-index: 1;
-
-  &.target {
-    color: black;
-  }
 `;
 
 const Slider = styled.div`
