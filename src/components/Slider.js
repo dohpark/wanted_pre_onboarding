@@ -1,52 +1,50 @@
-import React from "react";
+import React, { useRef } from "react";
 import styled from "styled-components";
 
 const Slider = () => {
-  const onInputHandler = (e) => {
-    const percentage = document.querySelector("#percentage");
-    const label = document.querySelector(".range-labels");
-    const progressBar = document.querySelector("#progress-bar");
+  const input = useRef();
+  const percentage = useRef();
+  const label = useRef();
+  const progressBar = useRef();
 
+  const onInputHandler = (e) => {
     const value = e.target.value;
-    percentage.innerHTML = value;
+    percentage.current.innerHTML = value;
 
     const index = parseInt(+value / 25);
-    Array.from(label.children).forEach((child, i) => {
+    Array.from(label.current.children).forEach((child, i) => {
       child.classList.remove("target");
       if (i <= index) {
         child.classList.add("target");
       }
     });
 
-    progressBar.style.width = `${(320 * value) / 100}px`;
+    progressBar.current.style.width = `${(320 * value) / 100}px`;
   };
 
   const onClickHandler = (e) => {
-    const input = document.querySelector("#rangeInput");
-    const percentage = document.querySelector("#percentage");
-    const label = document.querySelector(".range-labels");
-    const progressBar = document.querySelector("#progress-bar");
-
     const value = e.target.innerHTML;
 
-    input.value = value;
-    percentage.innerHTML = value;
+    input.current.value = value;
+    percentage.current.innerHTML = value;
 
     const index = parseInt(+value / 25);
 
-    Array.from(label.children).forEach((child, i) => {
+    Array.from(label.current.children).forEach((child, i) => {
       child.classList.remove("target");
       if (i <= index) {
         child.classList.add("target");
       }
     });
-    progressBar.style.width = `${(320 * value) / 100}px`;
+    progressBar.current.style.width = `${(320 * value) / 100}px`;
   };
 
   return (
     <Container>
       <PercentageWrapper>
-        <span id="percentage">0</span>
+        <span id="percentage" ref={percentage}>
+          0
+        </span>
       </PercentageWrapper>
       <RangeWrapper>
         <RangeInput
@@ -55,12 +53,12 @@ const Slider = () => {
           max="100"
           defaultValue="0"
           onInput={onInputHandler}
-          id="rangeInput"
+          ref={input}
         />
-        <ProgressBar id="progress-bar" />
+        <ProgressBar ref={progressBar} />
       </RangeWrapper>
 
-      <RangeLables className="range-labels">
+      <RangeLables ref={label}>
         <li className="target" onClick={onClickHandler}>
           0
         </li>
