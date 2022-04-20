@@ -31,7 +31,7 @@ onKeyUp 이벤트를 통해 사용자가 email을 작성시 정규표현식(제�
 
 ### 구현 방법
 
-키워드 필터 기능은 data state를 활용했습니다. data는 useState를 사용한 것으로 값이 변함에 따라 화면도 바뀔 수 있도록 했습니다. data는 `<input>` 태그에 작성한 값을 바탕으로 필터링을 적용한 배열입니다.
+키워드 필터 기능은 data state를 활용했습니다. data는 useState를 사용한 것으로 값이 변함에 따라 화면도 바뀔 수 있도록 했습니다. data는 `<input>` 태그에 작성한 값을 바탕으로 includes 메소드와 filter 메소드를 활용하여 필터링 할 수 있도록 했습니다.
 
 ```js
 <ContentList>
