@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import styled from "styled-components";
 import { ReactComponent as CheckMark } from "../images/checkMark.svg";
 import { ReactComponent as EyeClosed } from "../images/eyeClosed.svg";
@@ -8,32 +8,32 @@ const Input = () => {
   const [emailValid, setEmailValid] = useState(false);
   const [passwordType, setPasswordType] = useState(false);
 
+  const inValid = useRef();
+  const checkMark = useRef();
+
   const onKeyUpEmailHandler = (e) => {
     const email = e.target.value;
     const emailCheckRegex = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/;
-    const inValid = document.querySelector("#emailInvalid");
-    const checkMark = document.querySelector(".checkMark");
 
     if (!email) {
-      inValid.style.display = "none";
+      inValid.current.style.display = "none";
     } else if (emailCheckRegex.test(email)) {
       setEmailValid(true);
-      inValid.style.display = "none";
-      checkMark.style.fill = "#00b846";
+      inValid.current.style.display = "none";
+      checkMark.current.style.fill = "#00b846";
     } else {
       setEmailValid(false);
-      checkMark.style.fill = "#c9c9c9";
+      checkMark.current.style.fill = "#c9c9c9";
     }
   };
 
   const onBlurHandler = (e) => {
-    const inValid = document.querySelector("#emailInvalid");
     const email = e.target.value;
 
     if (!email || emailValid) {
-      inValid.style.display = "none";
+      inValid.current.style.display = "none";
     } else {
-      inValid.style.display = "block";
+      inValid.current.style.display = "block";
     }
   };
 
@@ -52,9 +52,9 @@ const Input = () => {
             onBlur={onBlurHandler}
             placeholder="이메일을 입력해주세요"
           />
-          <CheckMark className="checkMark" />
+          <CheckMark className="checkMark" ref={checkMark} />
         </InputBlock>
-        <EmailInvalid id="emailInvalid">Invalid e-mail address</EmailInvalid>
+        <EmailInvalid ref={inValid}>Invalid e-mail address</EmailInvalid>
       </InputWrapper>
       <InputWrapper>
         <InputType>Password</InputType>
