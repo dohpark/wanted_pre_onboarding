@@ -1,6 +1,7 @@
 import Toggle from "./components/Toggle";
 import Tab from "./components/Tab";
 import Slider from "./components/Slider";
+import Input from "./components/Input";
 
 const App = () => {
   return (
@@ -8,6 +9,7 @@ const App = () => {
       <Toggle />
       <Tab />
       <Slider />
+      <Input />
     </>
   );
 };
