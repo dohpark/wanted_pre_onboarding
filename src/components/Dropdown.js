@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import styled from "styled-components";
 import { ReactComponent as SearchIcon } from "../images/search.svg";
 import { ReactComponent as DropdownIcon } from "../images/dropdown.svg";
@@ -23,49 +23,48 @@ const Dropdown = () => {
   const [data, setData] = useState(array);
   const [open, setOpen] = useState(true);
 
+  const currentValue = useRef();
+  const content = useRef();
+  const dropdownInput = useRef();
+
   const onKeyUpHandler = (e) => {
     const key = e.target.value;
     setData(array.filter((v) => v.includes(key)));
   };
 
   const onClickHandler = (e) => {
-    const currentValue = document.querySelector(".currentValue");
-    const content = document.querySelector(".dropdownContent");
-    const dropdownInput = document.querySelector("#dropdownInput");
-
-    currentValue.innerHTML = e.target.innerHTML;
-    dropdownInput.value = "";
+    currentValue.current.innerHTML = e.target.innerHTML;
+    dropdownInput.current.value = "";
     setData(array);
-    content.style.display = "none";
+    content.current.style.display = "none";
     setOpen(true);
   };
 
   const onClickContentHandler = (e) => {
-    const content = document.querySelector(".dropdownContent");
     setOpen(!open);
 
     if (open) {
-      content.style.display = "block";
+      content.current.style.display = "block";
     } else {
-      content.style.display = "none";
+      content.current.style.display = "none";
     }
   };
 
   return (
     <Container>
-      <DropdownDisplay className="currentValueWrapper">
-        <CurrentValue className="currentValue" onClick={onClickContentHandler}>
+      <DropdownDisplay>
+        <CurrentValue ref={currentValue} onClick={onClickContentHandler}>
           All Symbols
         </CurrentValue>
         <DropdownIcon className="dropdownIcon" />
       </DropdownDisplay>
-      <DropdownContent className="dropdownContent">
+      <DropdownContent ref={content}>
         <InputWrapper>
           <input
             type="text"
             placeholder="Search Symbol"
             onKeyUp={onKeyUpHandler}
-            id="dropdownInput"
+            ref={dropdownInput}
           />
           <SearchIcon className="searchIcon" />
         </InputWrapper>
