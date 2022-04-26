@@ -9,7 +9,6 @@ const Dropdown = () => {
     "b",
     "c",
     "d",
-    "ae",
     "ac",
     "ae",
     "bc",
@@ -22,8 +21,8 @@ const Dropdown = () => {
 
   const [data, setData] = useState(array);
   const [open, setOpen] = useState(true);
+  const [currentValue, setCurrentValue] = useState("All Symbols");
 
-  const currentValue = useRef();
   const content = useRef();
   const dropdownInput = useRef();
 
@@ -33,7 +32,7 @@ const Dropdown = () => {
   };
 
   const onClickHandler = (e) => {
-    currentValue.current.innerHTML = e.target.innerHTML;
+    setCurrentValue(e.target.innerHTML);
     dropdownInput.current.value = "";
     setData(array);
     content.current.style.display = "none";
@@ -53,8 +52,8 @@ const Dropdown = () => {
   return (
     <Container>
       <DropdownDisplay>
-        <CurrentValue ref={currentValue} onClick={onClickContentHandler}>
-          All Symbols
+        <CurrentValue onClick={onClickContentHandler}>
+          {currentValue}
         </CurrentValue>
         <DropdownIcon className="dropdownIcon" />
       </DropdownDisplay>

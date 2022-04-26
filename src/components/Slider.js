@@ -1,15 +1,16 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import styled from "styled-components";
 
 const Slider = () => {
   const input = useRef();
-  const percentage = useRef();
   const label = useRef();
   const progressBar = useRef();
 
+  const [percentageValue, setPercentageValue] = useState(0);
+
   const onInputHandler = (e) => {
     const value = e.target.value;
-    percentage.current.innerHTML = value;
+    setPercentageValue(value);
 
     const index = parseInt(+value / 25);
     Array.from(label.current.children).forEach((child, i) => {
@@ -26,7 +27,7 @@ const Slider = () => {
     const value = e.target.innerHTML;
 
     input.current.value = value;
-    percentage.current.innerHTML = value;
+    setPercentageValue(value);
 
     const index = parseInt(+value / 25);
 
@@ -42,16 +43,14 @@ const Slider = () => {
   return (
     <Container>
       <PercentageWrapper>
-        <span id="percentage" ref={percentage}>
-          0
-        </span>
+        <span id="percentage">{percentageValue}</span>
       </PercentageWrapper>
       <RangeWrapper>
         <RangeInput
           type="range"
           min="0"
           max="100"
-          defaultValue="0"
+          defaultValue={percentageValue}
           onInput={onInputHandler}
           ref={input}
         />
