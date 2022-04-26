@@ -17,6 +17,7 @@ const Input = () => {
 
     if (!email) {
       inValid.current.style.display = "none";
+      checkMark.current.style.fill = "#c9c9c9";
     } else if (emailCheckRegex.test(email)) {
       setEmailValid(true);
       inValid.current.style.display = "none";
